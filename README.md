@@ -1,7 +1,12 @@
 # React - baby steps
 
+#### How it begins - React + Vite
 
-#### How it begins
+```bash
+npm create vite@latest
+```
+
+#### How it begins - manually
 
 Create with:
 
