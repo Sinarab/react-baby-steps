@@ -19,6 +19,14 @@ export default function Clicker() {
   //   setCount(savedCount);
   // }, []); // just once!
 
+  // How to dispose!
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem("clicks")
+      console.log("dispose");
+    };
+  }, []);
+
   useEffect(() => {
     localStorage.setItem("clicks", count);
   }, [count]); // when count changes
