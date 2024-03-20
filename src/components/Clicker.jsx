@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Clicker({ keyName, color }) {
+export default function Clicker({ increment, keyName, color  }) {
   // to update a state we have to use a setter function
   // useState is a Hook
   // hooks to do specific tasks inside a component
@@ -39,6 +39,7 @@ export default function Clicker({ keyName, color }) {
     // update can be done with a function
     // better to handle when you have async operations
     setCount((prev) => prev + 1);
+    increment();
   };
 
   return (
