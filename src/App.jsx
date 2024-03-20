@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Clicker from "./components/Clicker";
 
 // creating a component
@@ -10,9 +10,18 @@ export default function App({ clickersCount, children }) {
     setHasClicker(!hasClicker);
   };
 
-  const genHSLColor = () => {
-    return `hsl(${Math.random() * 360}deg, 100%, 70%)`;
-  };
+  // There is a problem! changing every time the component react to some state
+  // const genHSLColor = () => {
+  //   return `hsl(${Math.random() * 360}deg, 100%, 70%)`;
+  // };
+
+  // useMemo only change when the dependencies changes
+  // used to complex calculations
+  const colors = useMemo(() => {
+    return [...Array(clickersCount)].map(
+      () => `hsl(${Math.random() * 360}deg, 100%, 70%)`
+    );
+  }, [clickersCount]);
 
   // Lifiting state - share state between components.
   // pass trought props to its children change.
@@ -28,6 +37,7 @@ export default function App({ clickersCount, children }) {
       <button onClick={toggleClickerClick}>
         Toggle clicker: {hasClicker ? `Hide` : `Show`}
       </button>
+
       {/* {hasClicker ? <Clicker /> : null} */}
       {/* {hasClicker && (
         <>
@@ -44,7 +54,7 @@ export default function App({ clickersCount, children }) {
               key={i}
               increment={increment}
               keyName={`count${i}`}
-              color={genHSLColor()}
+              color={colors[i]}
             />
           )
       )}
