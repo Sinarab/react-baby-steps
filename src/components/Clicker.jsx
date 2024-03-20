@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-export default function Clicker() {
+export default function Clicker({ keyName, color }) {
   // to update a state we have to use a setter function
   // useState is a Hook
   // hooks to do specific tasks inside a component
-  const savedCount = +localStorage.getItem("clicks") || 0;
+  const savedCount = +localStorage.getItem(keyName) || 0;
   const [count, setCount] = useState(savedCount);
 
   // useEffect is a hook to handle changes
@@ -22,13 +22,13 @@ export default function Clicker() {
   // How to dispose!
   useEffect(() => {
     return () => {
-      localStorage.removeItem("clicks")
+      localStorage.removeItem(keyName);
       console.log("dispose");
     };
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("clicks", count);
+    localStorage.setItem(keyName, count);
   }, [count]); // when count changes
 
   const onButtonClick = () => {
@@ -43,7 +43,9 @@ export default function Clicker() {
 
   return (
     <div>
-      <div>Clicks count: {count} </div>
+      <div>
+        Clicks count: <span style={{ color }}>{count}</span>{" "}
+      </div>
       {/*  send the function, do not call it! 
       mouse ev ref: https://legacy.reactjs.org/docs/events.html#mouse-events */}
       <button onClick={onButtonClick}>Click me!</button>
