@@ -2,7 +2,7 @@ import { useState } from "react";
 import Clicker from "./components/Clicker";
 
 // creating a component
-export default function App({ children }) {
+export default function App({ clickersCount, children }) {
   const [hasClicker, setHasClicker] = useState(true);
   const [globalCount, setGlobalCount] = useState(0);
 
@@ -29,12 +29,24 @@ export default function App({ children }) {
         Toggle clicker: {hasClicker ? `Hide` : `Show`}
       </button>
       {/* {hasClicker ? <Clicker /> : null} */}
-      {hasClicker && (
+      {/* {hasClicker && (
         <>
           <Clicker increment={ increment } keyName="countA" color={genHSLColor()} />
           <Clicker increment={ increment } keyName="countB" color={genHSLColor()} />
           <Clicker increment={ increment } keyName="countC" color={genHSLColor()} />
         </>
+      )} */}
+
+      {[...Array(clickersCount)].map(
+        (_, i) =>
+          hasClicker && (
+            <Clicker
+              key={i}
+              increment={increment}
+              keyName={`count${i}`}
+              color={genHSLColor()}
+            />
+          )
       )}
     </>
   );

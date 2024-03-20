@@ -6,8 +6,8 @@ const root = createRoot(document.querySelector("#root"));
 
 root.render(
   <div>
-    <App>
-      <h1>Children</h1>
+    <App clickersCount={2}>
+      <h3>Children</h3>
     </App>
   </div>
 );
