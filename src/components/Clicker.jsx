@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export default function Clicker({ increment, keyName, color  }) {
+export default function Clicker({ increment, keyName, color }) {
   // to update a state we have to use a setter function
   // useState is a Hook
   // hooks to do specific tasks inside a component
   const savedCount = +localStorage.getItem(keyName) || 0;
   const [count, setCount] = useState(savedCount);
+
+  // ref is a simple object associated with something of the template
+  // remember that here the ref is not defined yet
+  // usually is used on useEffect
+  const buttonRef = useRef();
 
   // useEffect is a hook to handle changes
   // it is called:
@@ -21,6 +26,10 @@ export default function Clicker({ increment, keyName, color  }) {
 
   // How to dispose!
   useEffect(() => {
+    console.log(buttonRef)
+    buttonRef.current.style.background = 'papayawhip';
+    buttonRef.current.style.color = 'salmon'
+
     return () => {
       localStorage.removeItem(keyName);
       console.log("dispose");
@@ -49,7 +58,9 @@ export default function Clicker({ increment, keyName, color  }) {
       </div>
       {/*  send the function, do not call it! 
       mouse ev ref: https://legacy.reactjs.org/docs/events.html#mouse-events */}
-      <button onClick={onButtonClick}>Click me!</button>
+      <button ref={buttonRef} onClick={onButtonClick}>
+        Click me!
+      </button>
     </div>
   );
 }
