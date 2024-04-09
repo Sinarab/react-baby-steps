@@ -6,7 +6,7 @@ const root = createRoot(document.querySelector("#root"));
 
 root.render(
   <div>
-    <App clickersCount={10}>
+    <App clickersCount={5}>
       <h3>Children</h3>
     </App>
   </div>
