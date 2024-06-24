@@ -33,7 +33,7 @@ export default function App({ clickersCount, children }) {
   // returning a JSX element
   return (
     <>
-      <h1>Example {globalCount}</h1>
+      <h1 style={{ backgroundColor: "red" }} className="title">Example {globalCount}</h1>
       {children}
       <button onClick={toggleClickerClick}>
         Toggle clicker: {hasClicker ? `Hide` : `Show`}

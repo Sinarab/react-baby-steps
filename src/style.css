@@ -1,3 +1,11 @@
+.title {
+  text-decoration: blink;
+  text-transform: capitalize;
+  padding: 1rem;
+  border-radius: .25rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+
 .cute-paragraph {
   color: brown;
   background-color: lightgreen;

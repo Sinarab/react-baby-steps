@@ -1,22 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function People() {
-  const [people, setPeople] = useState([
-    { id: "1", name: "Sinara" },
-    { id: "2", name: "Opaioson" },
-    { id: "3", name: "Gal" },
-    { id: "4", name: "Tim Maia" },
-  ]);
+  const [people, setPeople] = useState([]);
+
+  const getPeople = async () => {
+    const url = "https://jsonplaceholder.typicode.com/users";
+    const resp = await fetch(url);
+    const users = await resp.json();
+    setPeople(users);
+  };
+
+  useEffect(() => {
+    setTimeout(() => getPeople(), 700);
+  }, []);
 
   return (
     <div>
       <h2>People</h2>
 
-      <ul>
-        {people.map((person) => (
-          <li key={person.id}>{person.name}</li>
-        ))}
-      </ul>
+      {people.length === 0 && (
+        <div>
+          <h3>Loading...</h3>
+        </div>
+      )}
+
+      {people.length > 0 && (
+        <ul>
+          {people.map((person) => (
+            <li key={person.id}>
+              {person.name} || {person.website}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

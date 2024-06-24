@@ -26,7 +26,6 @@ export default function Clicker({ increment, keyName, color }) {
 
   // How to dispose!
   useEffect(() => {
-    console.log(buttonRef)
     buttonRef.current.style.background = 'papayawhip';
     buttonRef.current.style.color = 'salmon'
 
